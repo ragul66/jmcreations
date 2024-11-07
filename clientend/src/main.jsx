@@ -12,6 +12,7 @@ import Productpage from "./pages/productpage";
 import Home from "./pages/Home";
 import Preloader from "./components/Preloader"; // Import the Preloader component
 import AddCategory from "./pages/AddCategory";
+import Login from "./pages/Login";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -26,6 +27,10 @@ const App = () => {
   }, []);
 
   const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Login />,
+    },
     {
       element: <Layout setLoading={setLoading} />, // Pass setLoading to Layout
       children: [
