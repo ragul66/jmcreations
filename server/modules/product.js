@@ -10,6 +10,14 @@ const productSchrma = new Schema(
       type: String,
       required: true,
     },
+    productcategory: {
+      type: String,
+      required: true,
+    },
+    productsubcategory: {
+      type: String,
+      required: true,
+    },
     productprice: {
       type: Number,
       required: true,

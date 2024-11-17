@@ -7,12 +7,16 @@ const categorySchema = new Schema(
       type: String,
       required: true,
     },
+    Subcategory: {
+      type: [String],
+      required: true,
+    },
     age: {
-      type: Number,
+      type: [Number],
       required: true,
     },
     Language: {
-      type: String,
+      type: [String],
       required: true,
     },
   },
