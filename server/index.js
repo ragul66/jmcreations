@@ -4,8 +4,9 @@ const cors = require("cors");
 const app = express();
 
 //routes path
-const admin = require("./routes/adminroute");
-const product = require("./routes/productroute");
+const admin = require("./src/routes/adminroute");
+const product = require("./src/routes/productroute");
+const category = require("./src/routes/categoryroute");
 
 //Load environment variable
 if (process.env.NODE_ENV != "production") {
@@ -31,6 +32,7 @@ app.use("/uploads", express.static("uploads"));
 //routes
 app.use("/admin", admin);
 app.use("/product", product);
+app.use("/category", category);
 
 app.get("/", (req, res) => {
   res.send("Welcome to jkcreations API Routes");

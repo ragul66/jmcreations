@@ -11,6 +11,18 @@ const adminSchema = new Schema(
       type: String,
       required: true,
     },
+    products: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "products",
+      },
+    ],
+    categories: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "categories",
+      },
+    ],
   },
   {
     timestamps: true,
