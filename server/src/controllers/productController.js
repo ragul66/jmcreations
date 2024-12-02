@@ -3,18 +3,33 @@ const Product = require("../modules/product");
 // Controller function to add a new product
 exports.addProduct = async (req, res) => {
   try {
-    const { productName, productprice, productdescription, age, language } =
-      req.body;
+    const {
+      productName,
+      productcategory,
+      productsubcategory,
+      productprice,
+      stock,
+      productdescription,
+      age,
+      language,
+      publication,
+    } = req.body;
     const productImages = req.files.map((file) => file.path);
 
     const newProduct = await Product.create({
       productimages: productImages,
       productName,
+      productcategory,
+      productsubcategory,
       productprice,
+      stock,
       productdescription,
       age,
       language,
+      publication,
     });
+    console.log("Received body:", req.body);
+    console.log("Received files:", req.files);
 
     return res.status(201).json(newProduct);
   } catch (error) {
@@ -25,7 +40,7 @@ exports.addProduct = async (req, res) => {
   }
 };
 
-//controller to getall the products
+//controller to get all the products
 exports.getAllProducts = async (req, res) => {
   try {
     const products = await Product.find();

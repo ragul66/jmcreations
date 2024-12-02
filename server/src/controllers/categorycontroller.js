@@ -1,5 +1,6 @@
 // controllers/categoryController.js
 const Category = require("../modules/Category");
+const Admin = require("../modules/admin");
 
 // Create a new category
 exports.createCategory = async (req, res) => {
