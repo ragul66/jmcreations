@@ -5,17 +5,24 @@ const Admin = require("../modules/admin");
 // Create a new category
 exports.createCategory = async (req, res) => {
   try {
-    const { categoryName, Subcategory, age, Language } = req.body;
+    const { categoryName, subCategory, age, language } = req.body;
     const { adminId } = req.params;
+
+    // Validate input
+    if (!categoryName || !subCategory || !age || !language) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
+
     const newCategory = new Category({
       categoryName,
-      Subcategory,
+      subCategory,
       age,
-      Language,
+      language,
     });
+
     const savedCategory = await newCategory.save();
 
-    // Push category ID to admin's categories
+    // Update admin's categories
     await Admin.findByIdAndUpdate(adminId, {
       $push: { categories: savedCategory._id },
     });

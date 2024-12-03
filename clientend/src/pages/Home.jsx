@@ -41,38 +41,50 @@ const Home = () => {
       ) : error ? (
         <p className="text-red-500">{error}</p>
       ) : (
-        <table className="min-w-full border-collapse border border-gray-200 overflow-y-auto">
-          <thead>
-            <tr className="bg-gray-200">
-              <th className="border border-gray-300 p-2">ID</th>
-              <th className="border border-gray-300 p-2">Product Name</th>
-              <th className="border border-gray-300 p-2">Price(₹)</th>
-              <th className="border border-gray-300 p-2">Description</th>
-              <th className="border border-gray-300 p-2">Age</th>
-              <th className="border border-gray-300 p-2">Language</th>
-            </tr>
-          </thead>
-          <tbody>
-            {products.map((product) => (
-              <tr key={product._id} className="hover:bg-gray-100">
-                <td className="border border-gray-300 p-2">{product._id}</td>
-                <td className="border border-gray-300 p-2">
-                  {product.productName}
-                </td>
-                <td className="border border-gray-300 p-2">
-                  {product.productprice}
-                </td>
-                <td className="border border-gray-300 p-2">
-                  {product.productdescription}
-                </td>
-                <td className="border border-gray-300 p-2">{product.age}</td>
-                <td className="border border-gray-300 p-2">
-                  {product.language}
-                </td>
+        <div className="overflow-x-auto">
+          <table className="min-w-full border-collapse border border-gray-200">
+            <thead>
+              <tr className="bg-gray-200">
+                <th className="border border-gray-300 p-2">ID</th>
+                <th className="border border-gray-300 p-2">Product Name</th>
+                <th className="border border-gray-300 p-2">Price(₹)</th>
+                <th className="border border-gray-300 p-2">Stock</th>
+                <th className="border border-gray-300 p-2">Publication</th>
+                <th className="border border-gray-300 p-2">Description</th>
+                <th className="border border-gray-300 p-2">Age</th>
+                <th className="border border-gray-300 p-2">Language</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {products.map((product) => (
+                <tr key={product._id} className="hover:bg-gray-100">
+                  <td className="border border-gray-300 p-2">{product._id}</td>
+                  <td className="border border-gray-300 p-2">
+                    {product.productName}
+                  </td>
+                  <td className="border border-gray-300 p-2">
+                    ₹{product.productprice}
+                  </td>
+                  <td className="border border-gray-300 p-2">
+                    {product.stock}
+                  </td>
+                  <td className="border border-gray-300 p-2">
+                    {product.publication}
+                  </td>
+                  <td className="border border-gray-300 p-2">
+                    {product.productdescription}
+                  </td>
+                  <td className="border border-gray-300 p-2 w-14">
+                    {product.age}
+                  </td>
+                  <td className="border border-gray-300 p-2">
+                    {product.language}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );

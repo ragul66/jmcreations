@@ -7,7 +7,7 @@ const categorySchema = new Schema(
       type: String,
       required: true,
     },
-    Subcategory: {
+    subCategory: {
       type: [String],
       required: true,
     },
@@ -15,7 +15,7 @@ const categorySchema = new Schema(
       type: [String],
       required: true,
     },
-    Language: {
+    language: {
       type: [String],
       required: true,
     },
@@ -25,4 +25,4 @@ const categorySchema = new Schema(
   }
 );
 
-module.exports = mongoose.model("category", categorySchema);
+module.exports = mongoose.model("Category", categorySchema);

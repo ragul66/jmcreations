@@ -4,7 +4,7 @@ const router = express.Router();
 const categoryController = require("../controllers/categorycontroller");
 
 // Create a new category
-router.post("/:adminId/postcategory", categoryController.createCategory);
+router.post("/postcategory/:adminId", categoryController.createCategory);
 
 // Get all categories
 router.get("/getallcategory", categoryController.getAllCategories);
