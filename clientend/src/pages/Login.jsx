@@ -18,11 +18,11 @@ const Login = () => {
       });
 
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       if (response.ok) {
         sessionStorage.setItem("token", data.token); // Store token in session storage
-        sessionStorage.setItem("adminId", data.adminId);
-        alert("Login successful!");
+        // sessionStorage.setItem("adminId", data.adminId);
+        // alert("Login successful!");
         navigate("/adminhome-jmcreations");
       } else {
         setError(data.message || "Login failed");

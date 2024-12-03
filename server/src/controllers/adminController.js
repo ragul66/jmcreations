@@ -36,11 +36,11 @@ exports.loginAdmin = async (req, res) => {
     }
 
     // Validate password
-    // const isPasswordValid = await bcrypt.compare(password, admin.password);
-    // if (!isPasswordValid) {
-    //   // Fix logic: should be `if (!isPasswordValid)`
-    //   return res.status(401).json({ message: "Invalid credentials" });
-    // }
+    const isPasswordValid = await bcrypt.compare(password, admin.password);
+    if (isPasswordValid) {
+      // Fix logic: should be `if (!isPasswordValid)`
+      return res.status(401).json({ message: "Invalid credentials" });
+    }
 
     // Generate JWT token
     const token = jwt.sign({ id: admin._id }, process.env.JWT_SECRET, {

@@ -9,6 +9,7 @@ import {
   FaBars,
   FaTimes,
 } from "react-icons/fa";
+import { TbCategoryPlus } from "react-icons/tb";
 import { MdReviews } from "react-icons/md";
 import { useLocation } from "react-router-dom";
 
@@ -20,98 +21,130 @@ const Navbar = () => {
 
   // Highlight active link based on current page
   const getLinkClass = (path) =>
-    location.pathname === path ? "text-yellow-400" : "hover:text-yellow-400";
+    location.pathname === path
+      ? "text-blue-500 font-semibold"
+      : "text-gray-600 hover:text-blue-500 transition-colors duration-300";
 
   return (
-    <header className="bg-primary text-white p-4 shadow-md fixed w-full  top-0 z-10 font-poppins">
-      <div className="container mx-auto flex items-center justify-between h-[60px]">
-        {/* Logo */}
-        <div className="text-2xl font-bold">
-          <span className="text-yellow-400">JM</span>Creations
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md">
+      <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+        {/* Logo with modern typography */}
+        <div className="flex items-center space-x-2">
+          <span className="text-2xl font-bold text-blue-600">JM</span>
+          <span className="text-xl font-medium text-gray-800">Creations</span>
         </div>
 
         {/* Mobile Menu Toggle */}
         <button
-          className="lg:hidden text-2xl"
+          className="lg:hidden text-gray-700 hover:text-blue-600"
           onClick={toggleMenu}
           aria-label="Toggle Menu"
         >
-          {isOpen ? <FaTimes /> : <FaBars />}
+          {isOpen ? (
+            <FaTimes className="text-2xl" />
+          ) : (
+            <FaBars className="text-2xl" />
+          )}
         </button>
 
-        {/* Navbar Links - Hidden on Mobile */}
+        {/* Navbar Links */}
         <nav
-          className={`${
-            isOpen ? "block" : "hidden"
-          } lg:flex gap-8 lg:static absolute top-full left-0 w-full lg:w-auto bg-blue-800 lg:bg-transparent p-4 lg:p-0`}
+          className={`
+          ${
+            isOpen
+              ? "block absolute top-full left-0 w-full bg-white shadow-lg"
+              : "hidden"
+          }
+          lg:block lg:static lg:w-auto lg:bg-transparent lg:shadow-none
+          transition-all duration-300 ease-in-out
+        `}
         >
-          <a
-            href="/adminhome-jmcreations"
-            className={`flex items-center gap-2 ${getLinkClass(
-              "/adminhome-jmcreations"
-            )}`}
-          >
-            <FaHome className="text-lg" /> Home
-          </a>
-          <a
-            href="/addproductpage"
-            className={`flex items-center gap-2 ${getLinkClass(
-              "/addproductpage"
-            )}`}
-          >
-            <FaBook className="text-lg" /> AddProducts
-          </a>
-          <a
-            href="#"
-            className={`flex items-center gap-2 ${getLinkClass("/about")}`}
-          >
-            {/* <FaInfoCircle className="text-lg" /> Reviews */}
-            <MdReviews className="text-lg" />
-            Reviews
-          </a>
-          <a
-            href="/addcategory&age&Lang"
-            className={`flex items-center gap-2 ${getLinkClass(
-              "/addcategory&age&Lang"
-            )}`}
-          >
-            <FaPhone className="text-lg" /> AddCategories&Age
-          </a>
+          <ul className="flex flex-col lg:flex-row space-y-2 lg:space-y-0 lg:space-x-6 p-4 lg:p-0">
+            {[
+              { href: "/adminhome-jmcreations", icon: FaHome, label: "Home" },
+              { href: "/addproductpage", icon: FaBook, label: "Add Products" },
+              { href: "#", icon: MdReviews, label: "Reviews" },
+              {
+                href: "/addcategory&age&Lang",
+                icon: TbCategoryPlus,
+                label: "Add Categories",
+              },
+              {
+                href: "#",
+                icon: FaPhone,
+                label: "Accounts",
+              },
+            ].map(({ href, icon: Icon, label }) => (
+              <li key={href}>
+                <a
+                  href={href}
+                  className={`
+                    flex items-center space-x-2 py-2 px-3 rounded-md 
+                    ${getLinkClass(href)}
+                    hover:bg-blue-50 transition-all duration-300
+                  `}
+                >
+                  <Icon className="text-lg" />
+                  <span>{label}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
         </nav>
 
-        {/* Search Bar - Stacks on Mobile */}
-        <div className="hidden lg:flex items-center gap-2">
-          <input
-            type="text"
-            placeholder="Search for products..."
-            className="bg-white text-black p-2 rounded-md pl-8 focus:outline-none"
-          />
-          <FaSearch className="text-black cursor-pointer" />
-        </div>
+        {/* Search and User Actions */}
+        <div className="hidden lg:flex items-center space-x-4">
+          {/* Search Input */}
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Search products..."
+              className="
+                pl-10 pr-4 py-2 w-64 
+                border border-gray-300 rounded-full 
+                focus:outline-none focus:ring-2 focus:ring-blue-500
+                transition-all duration-300
+              "
+            />
+            <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+          </div>
 
-        {/* User Account Link */}
-        <a
-          href="#"
-          className={`flex items-center gap-2 ${getLinkClass("/account")}`}
-          onClick={(e) => {
-            e.preventDefault(); // Prevent default anchor behavior
-            sessionStorage.clear("token"); // Clear the session storage
-            window.location.href = "/"; // Navigate to /login
-          }}
-        >
-          <FaUser className="text-lg" /> Account
-        </a>
+          {/* Logout Link */}
+          <a
+            href="#"
+            className="
+              flex items-center space-x-2 
+              text-gray-700 hover:text-blue-600 
+              transition-colors duration-300
+            "
+            onClick={(e) => {
+              e.preventDefault();
+              sessionStorage.clear("token");
+              window.location.href = "/";
+            }}
+          >
+            <FaUser className="text-lg" />
+            <span>Logout</span>
+          </a>
+        </div>
       </div>
 
-      {/* Search Bar on Mobile */}
+      {/* Mobile Search */}
       {isOpen && (
-        <div className="flex lg:hidden mt-2 mx-4">
-          <input
-            type="text"
-            placeholder="Search for products..."
-            className="bg-white text-black p-2 rounded-md w-full focus:outline-none"
-          />
-          <FaSearch className="text-gray-500 absolute right-6 top-4 cursor-pointer" />
+        <div className="lg:hidden px-4 pb-4">
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Search products..."
+              className="
+                w-full pl-10 pr-4 py-2 
+                border border-gray-300 rounded-full 
+                focus:outline-none focus:ring-2 focus:ring-blue-500
+                transition-all duration-300
+              "
+            />
+            <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+          </div>
         </div>
       )}
     </header>

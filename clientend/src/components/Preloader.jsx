@@ -13,8 +13,10 @@ const Preloader = () => {
       {/* Loader Animation */}
       <div className="animate-spin rounded-full h-24 w-24 border-8 border-t-4 border-blue-500 border-b-4 border-transparent"></div>
       <div className="mt-4 text-center">
-        <h2 className="text-3xl font-semibold text-blue-600">Hold tight!</h2>
-        <p className="text-xl text-gray-700">We are fetching your content...</p>
+        <h2 className="md:text-3xl font-semibold text-blue-600">Hold tight!</h2>
+        <p className="md:text-xl text-gray-700">
+          Fetching Awesome JM Data's...
+        </p>
       </div>
     </div>
   );
