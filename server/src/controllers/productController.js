@@ -14,8 +14,11 @@ exports.addProduct = async (req, res) => {
       language,
       publication,
     } = req.body;
+
+    // Collect uploaded file paths
     const productImages = req.files.map((file) => file.path);
 
+    // Create new product
     const newProduct = await Product.create({
       productimages: productImages,
       productName,
@@ -28,12 +31,10 @@ exports.addProduct = async (req, res) => {
       language,
       publication,
     });
-    console.log("Received body:", req.body);
-    console.log("Received files:", req.files);
 
     return res.status(201).json(newProduct);
   } catch (error) {
-    console.log("Error while adding product:", error);
+    console.error("Error while adding product:", error);
     return res
       .status(500)
       .json({ error: "An error occurred while adding product details" });
@@ -43,10 +44,10 @@ exports.addProduct = async (req, res) => {
 //controller to get all the products
 exports.getAllProducts = async (req, res) => {
   try {
-    const products = await Product.find();
-    return res.status(200).json(products);
+    const products = await Product.find(); // Fetch all products from DB
+    return res.status(200).json(products); // Return fetched products
   } catch (error) {
-    console.log("Error while fetching products:", error);
+    console.error("Error while fetching products:", error);
     return res
       .status(500)
       .json({ error: "An error occurred while fetching products" });

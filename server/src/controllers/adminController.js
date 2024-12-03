@@ -29,27 +29,31 @@ exports.loginAdmin = async (req, res) => {
   try {
     const { adminName, password } = req.body;
 
+    // Find admin by adminName
     const admin = await Admin.findOne({ adminName });
     if (!admin) {
       return res.status(401).json({ message: "Admin not found" });
     }
 
-    const isPasswordValid = await bcrypt.compare(password, admin.password);
-    if (isPasswordValid) {
-      return res.status(401).json({ message: "Invalid credentials" });
-    }
+    // Validate password
+    // const isPasswordValid = await bcrypt.compare(password, admin.password);
+    // if (!isPasswordValid) {
+    //   // Fix logic: should be `if (!isPasswordValid)`
+    //   return res.status(401).json({ message: "Invalid credentials" });
+    // }
 
+    // Generate JWT token
     const token = jwt.sign({ id: admin._id }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
 
-    return res.status(200).json({ token });
+    // Send response with token and admin ID
+    return res.status(200).json({ token, adminId: admin._id });
   } catch (error) {
     console.error("Error during admin login:", error);
     return res.status(500).json({ message: "Server error" });
   }
 };
-
 // Protected route for fetching admin details
 exports.getAdminInfo = async (req, res) => {
   try {

@@ -8,7 +8,7 @@ import "./index.css";
 import Layout from "./components/Layout";
 
 // Pages
-import Productpage from "./pages/productpage";
+import Productpage from "./pages/Productpage";
 import Home from "./pages/Home";
 import Preloader from "./components/Preloader"; // Import the Preloader component
 import AddCategory from "./pages/AddCategory";
@@ -39,7 +39,7 @@ const App = () => {
           element: <Login />,
         },
         {
-          path: "/  ",
+          path: "/adminhome-jmcreations",
           element: <Home />,
         },
         {

@@ -72,7 +72,7 @@ const Navbar = () => {
           <a
             href="/addcategory&age&Lang"
             className={`flex items-center gap-2 ${getLinkClass(
-              "//addcategory&age&Lang"
+              "/addcategory&age&Lang"
             )}`}
           >
             <FaPhone className="text-lg" /> AddCategories&Age
@@ -93,6 +93,11 @@ const Navbar = () => {
         <a
           href="#"
           className={`flex items-center gap-2 ${getLinkClass("/account")}`}
+          onClick={(e) => {
+            e.preventDefault(); // Prevent default anchor behavior
+            sessionStorage.clear("token"); // Clear the session storage
+            window.location.href = "/"; // Navigate to /login
+          }}
         >
           <FaUser className="text-lg" /> Account
         </a>

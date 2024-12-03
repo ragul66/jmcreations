@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 const Login = () => {
   const [adminName, setAdminName] = useState("");
@@ -18,8 +18,10 @@ const Login = () => {
       });
 
       const data = await response.json();
+      console.log(data);
       if (response.ok) {
         sessionStorage.setItem("token", data.token); // Store token in session storage
+        sessionStorage.setItem("adminId", data.adminId);
         alert("Login successful!");
         navigate("/adminhome-jmcreations");
       } else {

@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
+const { authenticateJWT } = require("../middlewares/authMiddleware");
 const productController = require("../controllers/productController");
 
 const storage = multer.diskStorage({
@@ -18,8 +19,9 @@ const upload = multer({
 }).array("productimages", 4);
 
 // Route to add product
-router.post("/add-product", (req, res) => {
-  upload(req, res, function (err) {
+// Product addition route
+router.post("/add-product", authenticateJWT, (req, res) => {
+  upload(req, res, (err) => {
     if (err) {
       return res.status(500).json({ error: "Image upload failed" });
     }
@@ -31,7 +33,7 @@ router.post("/add-product", (req, res) => {
 router.get("/product/:productId", productController.getProductById);
 
 // Route to get all products
-router.get("/products", productController.getAllProducts);
+router.get("/products", authenticateJWT, productController.getAllProducts);
 
 // Route to update a product by ID
 router.put("/product/:productId", (req, res) => {
