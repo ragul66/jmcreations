@@ -98,191 +98,284 @@ const AddCategory = () => {
 
   return (
     <>
-      <div className=" flex items-center justify-end mt-28 mr-12 ">
-        {/* Add Category Button */}
-        <button
-          onClick={() => setIsModalOpen(true)}
-          className="bg-blue-500 text-white py-2 px-4 rounded"
-        >
-          + Add Category
-        </button>
-
-        {/* Modal */}
-        {isModalOpen && (
-          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-            <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-lg relative">
-              <button
-                onClick={() => setIsModalOpen(false)}
-                className="absolute top-2 right-2 bg-red-500 text-white rounded-full px-3 py-1"
-              >
-                ✕
-              </button>
-              <h1 className="text-2xl font-bold mb-6 text-center">
-                Add Category
-              </h1>
-              {message && (
-                <p className="mt-4 text-sm text-red-500 text-center">
-                  {message}
-                </p>
-              )}
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium">
-                    Category Name
-                  </label>
-                  <input
-                    type="text"
-                    value={categoryName}
-                    onChange={(e) => setCategoryName(e.target.value)}
-                    className="border rounded p-2 w-full"
-                    required
-                  />
-                </div>
-
-                {/* Subcategories */}
-                <div>
-                  <label className="block text-sm font-medium">
-                    Subcategories
-                  </label>
-                  {subCategories.map((subCategory, index) => (
-                    <div
-                      key={index}
-                      className="flex items-center space-x-2 mb-2"
-                    >
-                      <input
-                        type="text"
-                        value={subCategory}
-                        onChange={(e) =>
-                          updateField(
-                            setSubCategories,
-                            subCategories,
-                            index,
-                            e.target.value
-                          )
-                        }
-                        className="border rounded p-2 flex-1"
-                        required
-                      />
-                      <button
-                        type="button"
-                        onClick={() =>
-                          addField(setSubCategories, subCategories)
-                        }
-                        className="bg-green-500 text-white px-3 py-1 rounded"
-                      >
-                        +
-                      </button>
-                      {subCategories.length > 1 && (
-                        <button
-                          type="button"
-                          onClick={() =>
-                            removeField(setSubCategories, subCategories, index)
-                          }
-                          className="bg-red-500 text-white px-3 py-1 rounded"
-                        >
-                          -
-                        </button>
-                      )}
-                    </div>
-                  ))}
-                </div>
-
-                {/* Age Groups */}
-                <div>
-                  <label className="block text-sm font-medium">
-                    Age Groups
-                  </label>
-                  {ages.map((age, index) => (
-                    <div
-                      key={index}
-                      className="flex items-center space-x-2 mb-2"
-                    >
-                      <input
-                        type="text"
-                        value={age}
-                        onChange={(e) =>
-                          updateField(setAges, ages, index, e.target.value)
-                        }
-                        className="border rounded p-2 flex-1"
-                        required
-                      />
-                      <button
-                        type="button"
-                        onClick={() => addField(setAges, ages)}
-                        className="bg-green-500 text-white px-3 py-1 rounded"
-                      >
-                        +
-                      </button>
-                      {ages.length > 1 && (
-                        <button
-                          type="button"
-                          onClick={() => removeField(setAges, ages, index)}
-                          className="bg-red-500 text-white px-3 py-1 rounded"
-                        >
-                          -
-                        </button>
-                      )}
-                    </div>
-                  ))}
-                </div>
-
-                {/* Languages */}
-                <div>
-                  <label className="block text-sm font-medium">Languages</label>
-                  {languages.map((language, index) => (
-                    <div
-                      key={index}
-                      className="flex items-center space-x-2 mb-2"
-                    >
-                      <input
-                        type="text"
-                        value={language}
-                        onChange={(e) =>
-                          updateField(
-                            setLanguages,
-                            languages,
-                            index,
-                            e.target.value
-                          )
-                        }
-                        className="border rounded p-2 flex-1"
-                        required
-                      />
-                      <button
-                        type="button"
-                        onClick={() => addField(setLanguages, languages)}
-                        className="bg-green-500 text-white px-3 py-1 rounded"
-                      >
-                        +
-                      </button>
-                      {languages.length > 1 && (
-                        <button
-                          type="button"
-                          onClick={() =>
-                            removeField(setLanguages, languages, index)
-                          }
-                          className="bg-red-500 text-white px-3 py-1 rounded"
-                        >
-                          -
-                        </button>
-                      )}
-                    </div>
-                  ))}
-                </div>
-
-                <button
-                  type="submit"
-                  className="bg-blue-500 text-white py-2 px-4 rounded w-full"
-                >
-                  Add Category
-                </button>
-              </form>
-            </div>
+      <div className="  mt-24 flex items-end justify-end p-6">
+        <div className="container mx-auto max-w-md">
+          {/* Add Category Button */}
+          <div className="flex justify-end mb-6">
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="px-6 py-2 bg-indigo-600 text-white rounded-lg shadow-md hover:bg-indigo-700 transition-colors duration-300 ease-in-out"
+            >
+              + Add Category
+            </button>
           </div>
-        )}
+
+          {/* Modal */}
+          {isModalOpen && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
+              <div className="w-full max-w-lg bg-white rounded-xl shadow-2xl border border-gray-200 p-8 relative">
+                {/* Close Button */}
+                <button
+                  onClick={() => setIsModalOpen(false)}
+                  className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 transition-colors"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+
+                {/* Modal Title */}
+                <h2 className="text-2xl font-semibold text-gray-800 text-center mb-6">
+                  Create New Category
+                </h2>
+
+                {/* Error Message */}
+                {message && (
+                  <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg mb-4 text-center">
+                    {message}
+                  </div>
+                )}
+
+                {/* Form */}
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  {/* Category Name */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Category Name
+                    </label>
+                    <input
+                      type="text"
+                      value={categoryName}
+                      onChange={(e) => setCategoryName(e.target.value)}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                      required
+                      placeholder="Enter category name"
+                    />
+                  </div>
+
+                  {/* Subcategories */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Subcategories
+                    </label>
+                    {subCategories.map((subCategory, index) => (
+                      <div key={index} className="flex space-x-2 mb-2">
+                        <input
+                          type="text"
+                          value={subCategory}
+                          onChange={(e) =>
+                            updateField(
+                              setSubCategories,
+                              subCategories,
+                              index,
+                              e.target.value
+                            )
+                          }
+                          className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                          required
+                          placeholder="Enter subcategory"
+                        />
+                        <button
+                          type="button"
+                          onClick={() =>
+                            addField(setSubCategories, subCategories)
+                          }
+                          className="bg-green-500 text-white p-2 rounded-lg hover:bg-green-600 transition-colors"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-5 w-5"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </button>
+                        {subCategories.length > 1 && (
+                          <button
+                            type="button"
+                            onClick={() =>
+                              removeField(
+                                setSubCategories,
+                                subCategories,
+                                index
+                              )
+                            }
+                            className="bg-red-500 text-white p-2 rounded-lg hover:bg-red-600 transition-colors"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="h-5 w-5"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </button>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Age Groups */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Age Groups
+                    </label>
+                    {ages.map((age, index) => (
+                      <div key={index} className="flex space-x-2 mb-2">
+                        <input
+                          type="text"
+                          value={age}
+                          onChange={(e) =>
+                            updateField(setAges, ages, index, e.target.value)
+                          }
+                          className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                          required
+                          placeholder="Enter age group"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => addField(setAges, ages)}
+                          className="bg-green-500 text-white p-2 rounded-lg hover:bg-green-600 transition-colors"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-5 w-5"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </button>
+                        {ages.length > 1 && (
+                          <button
+                            type="button"
+                            onClick={() => removeField(setAges, ages, index)}
+                            className="bg-red-500 text-white p-2 rounded-lg hover:bg-red-600 transition-colors"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="h-5 w-5"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </button>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Languages */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Languages
+                    </label>
+                    {languages.map((language, index) => (
+                      <div key={index} className="flex space-x-2 mb-2">
+                        <input
+                          type="text"
+                          value={language}
+                          onChange={(e) =>
+                            updateField(
+                              setLanguages,
+                              languages,
+                              index,
+                              e.target.value
+                            )
+                          }
+                          className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                          required
+                          placeholder="Enter language"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => addField(setLanguages, languages)}
+                          className="bg-green-500 text-white p-2 rounded-lg hover:bg-green-600 transition-colors"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-5 w-5"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </button>
+                        {languages.length > 1 && (
+                          <button
+                            type="button"
+                            onClick={() =>
+                              removeField(setLanguages, languages, index)
+                            }
+                            className="bg-red-500 text-white p-2 rounded-lg hover:bg-red-600 transition-colors"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="h-5 w-5"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </button>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Submit Button */}
+                  <button
+                    type="submit"
+                    className="w-full py-3 bg-indigo-600 text-white rounded-lg shadow-md hover:bg-indigo-700 transition-colors duration-300 ease-in-out"
+                  >
+                    Create Category
+                  </button>
+                </form>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
       {/* table structure started */}
-      <div className="container mx-auto p-4 mt-24 font-poppins max-w-7xl">
+      <div className="container mx-auto p-4  font-poppins max-w-7xl">
         <h1 className="text-2xl font-bold mb-6 text-gray-800">Categories</h1>
 
         {error && (
