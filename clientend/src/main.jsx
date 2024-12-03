@@ -35,7 +35,11 @@ const App = () => {
       element: <Layout setLoading={setLoading} />, // Pass setLoading to Layout
       children: [
         {
-          path: "/adminhome-jmcreations",
+          path: "/",
+          element: <Login />,
+        },
+        {
+          path: "/  ",
           element: <Home />,
         },
         {
