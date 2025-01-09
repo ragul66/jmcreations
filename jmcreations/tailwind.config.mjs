@@ -9,6 +9,8 @@ export default {
     extend: {
       fontFamily: {
         roboto: ["var(--font-roboto)", "sans-serif"], // Use the CSS variable
+        dancingscript: ["var(--font-dancing-script)"],
+        quicksand: ["var(--font-quicksand)"],
       },
       colors: {
         background: "var(--background)",
